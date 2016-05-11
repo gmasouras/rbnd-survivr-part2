@@ -1,18 +1,27 @@
 require_relative "../lib/contestant"
 require_relative "../lib/jury"
+require_relative "../lib/tribe"
 
-@jury_members = %w(carlos walter aparna trinh diego juliana poornima)
-@jury_members.map!{ |member| Contestant.new(member) }
-@finalists = %w(orit colt)
-@finalists.map!{ |member| Contestant.new(member) }
-@jury = Jury.new
+@contestants = %w(carlos walter aparna trinh diego juliana poornima juha sofia julia fernando dena orit colt zhalisa farrin muhammed ari rasha gauri)
+@contestants.map!{ |contestant| Contestant.new(contestant) }
+@coyopa = Tribe.new({name: "Pagong", members: @contestants.shift(10)})
+@hunapu = Tribe.new({name: "Tagi", members: @contestants.shift(10)})
 
+immune = @coyopa.members.first
+immune_array = Array.new(9, immune)
 
-@jury.members = @jury_members
-@jury.cast_votes(@finalists)
-@jury.report_votes(@jury.cast_votes(@finalists))
+p @coyopa.tribal_council(immune: immune)
 
-final_votes = {@finalists.first => 4, @finalists.last => 3}
-@jury.announce_winner(final_votes)
-puts @finalists.first.class
+p @coyopa.members
+
+# 9.times do
+#     result = @coyopa.tribal_council(immune: immune)
+#     p result
+#     if  result.class == Contestant && result != immune
+#        immune_array.pop
+#     end
+#   end
+
+   
+
 
