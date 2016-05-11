@@ -10,4 +10,9 @@ require_relative "../lib/jury"
 
 @jury.members = @jury_members
 @jury.cast_votes(@finalists)
+@jury.report_votes(@jury.cast_votes(@finalists))
+
+final_votes = {@finalists.first => 4, @finalists.last => 3}
+@jury.announce_winner(final_votes)
+puts @finalists.first.class
 
