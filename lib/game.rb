@@ -30,4 +30,9 @@ class Game
 		}
 		return Tribe.new(name: merged_tribe_name, members: merged_members)
 	end
+
+	def individual_immunity_challenge
+		c_tribe = merge("combined_tribe")
+		return c_tribe.members.sample
+	end
 end

@@ -58,7 +58,7 @@ class TestGame < Minitest::Test
     assert included.include?(true)
   end
   
-  # def test_individual_immunity_challenge
-  #   assert_instance_of Contestant, @borneo.individual_immunity_challenge
-  # end
+  def test_individual_immunity_challenge
+    assert_instance_of Contestant, @borneo.individual_immunity_challenge
+  end
 end
