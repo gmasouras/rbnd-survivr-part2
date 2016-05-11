@@ -20,6 +20,17 @@ require_relative "jury"
 
 #This is where you will write your code for the three phases
 def phase_one
+	8.times {
+		@unlucky_tribe = @borneo.immunity_challenge
+		@lucky_tribe = @borneo.tribes.find { |tribe| tribe != @unlucky_tribe}
+
+		@unlucky_contestant = @unlucky_tribe.tribal_council(immune: nil)
+		@unlucky_tribe.members.delete(@unlucky_contestant)
+
+		@borneo.clear_tribes
+		@borneo.add_tribe(@unlucky_tribe)
+		@borneo.add_tribe(@lucky_tribe)
+}
 end
 
 def phase_two
