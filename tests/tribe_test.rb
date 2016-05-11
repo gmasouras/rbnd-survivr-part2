@@ -22,14 +22,14 @@ class TestTribe < Minitest::Test
     assert_respond_to @coyopa, :members
   end
   
-  # def test_initialize_puts_tribe_creation
-  #   contestants = ["person_one", "person_two"]
-  #   contestants.map!{ |contestant| Contestant.new(contestant) }
-  #   output = capture_io do
-  #     Tribe.new({name: "tribe", members: contestants})
-  #   end
-  #   refute_empty output[0]
-  # end
+  def test_initialize_puts_tribe_creation
+    contestants = ["person_one", "person_two"]
+    contestants.map!{ |contestant| Contestant.new(contestant) }
+    output = capture_io do
+      Tribe.new({name: "tribe", members: contestants})
+    end
+    refute_empty output[0]
+  end
   
   def test_tribe_to_s
     assert_output(@coyopa.name) {print "#{@coyopa}"}
