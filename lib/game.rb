@@ -21,14 +21,14 @@ class Game
 		@tribes = Array.new
 	end
 
-	def merge(merged_tribe_name)
-		merged_members = []
+	def merge(merge_tribe_name)
+		merge_members = []
 		@tribes.each { |tribe|
 			tribe.members.each { |contestant|
-				merged_members << contestant
+				merge_members << contestant
 			}
 		}
-		return Tribe.new(name: merged_tribe_name, members: merged_members)
+		return Tribe.new(name: merge_tribe_name, members: merge_members)
 	end
 
 	def individual_immunity_challenge

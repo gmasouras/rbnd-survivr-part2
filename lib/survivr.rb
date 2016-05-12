@@ -30,10 +30,14 @@ def phase_one
 		@borneo.clear_tribes
 		@borneo.add_tribe(@unlucky_tribe)
 		@borneo.add_tribe(@lucky_tribe)
-}
+	}
 end
 
 def phase_two
+	3.times {
+		@eliminated_contestant = @borneo.individual_immunity_challenge
+		@merge_tribe.members.delete(@eliminated_contestant)
+	}
 end
 
 def phase_three
