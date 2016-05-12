@@ -15,16 +15,16 @@ require_relative "../lib/jury"
 @borneo = Game.new(@coyopa, @hunapu)
 
 8.times {
-		@unlucky_tribe = @borneo.immunity_challenge
-		@lucky_tribe = @borneo.tribes.find { |tribe| tribe != @unlucky_tribe}
+	@unlucky_tribe = @borneo.immunity_challenge
+	@lucky_tribe = @borneo.tribes.find { |tribe| tribe != @unlucky_tribe}
 
-		@unlucky_contestant = @unlucky_tribe.tribal_council(immune: nil)
-		@unlucky_tribe.members.delete(@unlucky_contestant)
+	@unlucky_contestant = @unlucky_tribe.tribal_council(immune: nil)
+	@unlucky_tribe.members.delete(@unlucky_contestant)
 
-		@borneo.clear_tribes
-		@borneo.add_tribe(@unlucky_tribe)
-		@borneo.add_tribe(@lucky_tribe)
-	}
+	@borneo.clear_tribes
+	@borneo.add_tribe(@unlucky_tribe)
+	@borneo.add_tribe(@lucky_tribe)
+}
 
 @borneo.tribes.each { |tribe|
 	puts "Tribe: #{tribe.name}"
@@ -38,9 +38,14 @@ puts "Tribe: #{@merge_tribe.name}"
 @merge_tribe.members.each {|member| puts "#{member.name}"}
 
 3.times {
-		@eliminated_contestant = @borneo.individual_immunity_challenge
-		@merge_tribe.members.delete(@eliminated_contestant)
-	}
+	@immune_contestant = @borneo.individual_immunity_challenge
+	puts "The immune contestant: #{@immune_contestant.name}"
+	@eliminated_contestant = @merge_tribe.tribal_council(immune: @immune_contestant)
+	puts "The eliminated contestant: #{@eliminated_contestant.name}"
+	@merge_tribe.members.delete(@eliminated_contestant)
+	@borneo.clear_tribes
+	@borneo.add_tribe(@merge_tribe)
+}
 
 puts "Tribe: #{@merge_tribe.name}"
 @merge_tribe.members.each {|member| puts "#{member.name}"} 

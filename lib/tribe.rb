@@ -13,7 +13,7 @@ class Tribe
 	end
 
 	def tribal_council(contestant)
-		@members.delete(contestant[:immune])
-		return @members.sample
+		@members_to_go = @members.select { |member| member != contestant[:immune]}
+		return @members_to_go.sample
 	end
 end
