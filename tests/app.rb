@@ -13,6 +13,7 @@ require_relative "../lib/jury"
 
 # Create a new game of Survivor
 @borneo = Game.new(@coyopa, @hunapu)
+@jury = Jury.new
 
 8.times {
 	@unlucky_tribe = @borneo.immunity_challenge
@@ -50,4 +51,26 @@ puts "Tribe: #{@merge_tribe.name}"
 puts "Tribe: #{@merge_tribe.name}"
 @merge_tribe.members.each {|member| puts "#{member.name}"} 
 
-# @jury = Jury.new
+7.times {
+	@immune_contestant = @borneo.individual_immunity_challenge
+	puts "The immune contestant: #{@immune_contestant.name}"
+	@eliminated_contestant = @merge_tribe.tribal_council(immune: @immune_contestant)
+	puts "The eliminated contestant: #{@eliminated_contestant.name}"
+	@merge_tribe.members.delete(@eliminated_contestant)
+	@jury.add_member(@eliminated_contestant)
+	@borneo.clear_tribes
+	@borneo.add_tribe(@merge_tribe)
+}
+
+puts "Tribe-finalists: #{@merge_tribe.name}"
+@merge_tribe.members.each {|member| puts "#{member.name}"} 
+puts "------Jury-------"
+@jury.members.each {|member| puts "#{member.name}"} 
+
+finalists = @merge_tribe.members #set finalists
+vote_results = @jury.cast_votes(finalists) #Jury members report votes
+@jury.report_votes(vote_results) #Jury announces their votes
+@jury.announce_winner(vote_results) #Jury announces final winner
+
+
+

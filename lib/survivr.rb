@@ -45,7 +45,12 @@ end
 
 def phase_three
 	7.times {
-
+		@immune_contestant = @borneo.individual_immunity_challenge
+		@eliminated_contestant = @merge_tribe.tribal_council(immune: @immune_contestant)
+		@merge_tribe.members.delete(@eliminated_contestant)
+		@jury.add_member(@eliminated_contestant)
+		@borneo.clear_tribes
+		@borneo.add_tribe(@merge_tribe)
 	}
 end
 
