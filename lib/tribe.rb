@@ -16,4 +16,11 @@ class Tribe
 		@members_to_go = @members.select { |member| member != contestant[:immune]}
 		return @members_to_go.sample
 	end
+
+	def print_tribe
+		puts "Tribe: "+"#{name}".blue
+		members.each_with_index {|member, index|
+			puts "#{index+1}. " + "#{member}"
+		}
+	end
 end

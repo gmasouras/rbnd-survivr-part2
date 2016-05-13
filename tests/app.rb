@@ -3,7 +3,9 @@ require_relative "../lib/game"
 require_relative "../lib/tribe"
 require_relative "../lib/contestant"
 require_relative "../lib/jury"
+require "colorizr"
 
+String.create_colors
 @contestants = %w(carlos walter aparna trinh diego juliana poornima juha sofia julia fernando dena orit colt zhalisa farrin muhammed ari rasha gauri)
 @contestants.map!{ |contestant| Contestant.new(contestant) }.shuffle!
 
@@ -64,7 +66,7 @@ puts "Tribe: #{@merge_tribe.name}"
 
 puts "Tribe-finalists: #{@merge_tribe.name}"
 @merge_tribe.members.each {|member| puts "#{member.name}"} 
-puts "------Jury-------"
+puts "------Jury-------".red
 @jury.members.each {|member| puts "#{member.name}"} 
 
 finalists = @merge_tribe.members #set finalists

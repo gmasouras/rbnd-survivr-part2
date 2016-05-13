@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    artii (2.1.1)
+    colorizr (0.0.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  artii (= 2.1.1)
+  colorizr (= 0.0.2)
+
+BUNDLED WITH
+   1.12.2
