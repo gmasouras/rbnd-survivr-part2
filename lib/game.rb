@@ -28,11 +28,12 @@ class Game
 				merge_members << contestant
 			}
 		}
+		clear_tribes
+		@tribes << Tribe.new(name: merge_tribe_name, members: merge_members)
 		return Tribe.new(name: merge_tribe_name, members: merge_members)
 	end
 
 	def individual_immunity_challenge
-		c_tribe = merge("combined_tribe")
-		return c_tribe.members.sample
+		return @tribes.first.members.sample
 	end
 end

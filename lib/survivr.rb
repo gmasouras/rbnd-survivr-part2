@@ -47,8 +47,6 @@ def phase_two
 		eliminated_contestant = @merge_tribe.tribal_council(immune: immune_contestant)
 		puts "The eliminated contestant is: "+"#{eliminated_contestant.name}".red
 		@merge_tribe.members.delete(eliminated_contestant)
-		@borneo.clear_tribes
-		@borneo.add_tribe(@merge_tribe)
 	}
 end
 
@@ -60,8 +58,6 @@ def phase_three
 		puts "The eliminated contestant is: "+"#{eliminated_contestant.name}".red
 		@merge_tribe.members.delete(eliminated_contestant)
 		@jury.add_member(eliminated_contestant)
-		@borneo.clear_tribes
-		@borneo.add_tribe(@merge_tribe)
 	}
 end
 
