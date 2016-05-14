@@ -18,7 +18,7 @@ class Game
 	end
 
 	def clear_tribes
-		@tribes = Array.new
+		@tribes.clear
 	end
 
 	def merge(merge_tribe_name)

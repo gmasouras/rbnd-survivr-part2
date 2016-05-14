@@ -26,27 +26,27 @@ String.create_colors
 def phase_one
 	8.times { |time|
 		puts "Elimination #{time+1}".light_blue
-		@unlucky_tribe = @borneo.immunity_challenge
-		puts "The loser tribe is: "+"#{@unlucky_tribe.name}".blue
-		@lucky_tribe = @borneo.tribes.find { |tribe| tribe != @unlucky_tribe}
+		unlucky_tribe = @borneo.immunity_challenge
+		puts "The loser tribe is: "+"#{unlucky_tribe.name}".blue
+		lucky_tribe = @borneo.tribes.find { |tribe| tribe != unlucky_tribe}
 
-		@unlucky_contestant = @unlucky_tribe.tribal_council(immune: nil)
-		puts "The eliminated contestant is: "+"#{@unlucky_contestant.name}".red
-		@unlucky_tribe.members.delete(@unlucky_contestant)
+		unlucky_contestant = unlucky_tribe.tribal_council(immune: nil)
+		puts "The eliminated contestant is: "+"#{unlucky_contestant.name}".red
+		unlucky_tribe.members.delete(unlucky_contestant)
 
 		@borneo.clear_tribes
-		@borneo.add_tribe(@unlucky_tribe)
-		@borneo.add_tribe(@lucky_tribe)
+		@borneo.add_tribe(unlucky_tribe)
+		@borneo.add_tribe(lucky_tribe)
 	}
 end
 
 def phase_two
 	3.times { |time|
 		puts "Elimination #{time+1}".light_blue
-		@immune_contestant = @borneo.individual_immunity_challenge
-		@eliminated_contestant = @merge_tribe.tribal_council(immune: @immune_contestant)
-		puts "The eliminated contestant is: "+"#{@eliminated_contestant.name}".red
-		@merge_tribe.members.delete(@eliminated_contestant)
+		immune_contestant = @borneo.individual_immunity_challenge
+		eliminated_contestant = @merge_tribe.tribal_council(immune: immune_contestant)
+		puts "The eliminated contestant is: "+"#{eliminated_contestant.name}".red
+		@merge_tribe.members.delete(eliminated_contestant)
 		@borneo.clear_tribes
 		@borneo.add_tribe(@merge_tribe)
 	}
@@ -55,11 +55,11 @@ end
 def phase_three
 	7.times { |time|
 		puts "Elimination #{time+1}".light_blue
-		@immune_contestant = @borneo.individual_immunity_challenge
-		@eliminated_contestant = @merge_tribe.tribal_council(immune: @immune_contestant)
-		puts "The eliminated contestant is: "+"#{@eliminated_contestant.name}".red
-		@merge_tribe.members.delete(@eliminated_contestant)
-		@jury.add_member(@eliminated_contestant)
+		immune_contestant = @borneo.individual_immunity_challenge
+		eliminated_contestant = @merge_tribe.tribal_council(immune: immune_contestant)
+		puts "The eliminated contestant is: "+"#{eliminated_contestant.name}".red
+		@merge_tribe.members.delete(eliminated_contestant)
+		@jury.add_member(eliminated_contestant)
 		@borneo.clear_tribes
 		@borneo.add_tribe(@merge_tribe)
 	}
@@ -71,49 +71,48 @@ puts a.asciify('SURVIVOR').green
 
 #Stylish printing on terminal
 puts "Let the game begins..."
-puts ""
-puts ""
+puts 
 @coyopa.print_tribe
-puts ""
+puts 
 @hunapu.print_tribe
 
 # If all the tests pass, the code below should run the entire simulation!!
 #=========================================================
-puts ""
+puts 
 puts "First round of 8 eliminations..."
-puts ""
+puts 
 phase_one #8 eliminations
 @merge_tribe = @borneo.merge("Cello") # After 8 eliminations, merge the two tribes together
-puts ""
+puts 
 puts "Second round of 3 eliminations..."
-puts ""
+puts 
 @merge_tribe.print_tribe
-puts ""
+puts 
 phase_two #3 more eliminations
 @jury = Jury.new
-puts ""
+puts 
 puts "Last round of 7 eliminations..."
-puts ""
+puts 
 @merge_tribe.print_tribe
-puts ""
+puts 
 phase_three #7 eliminations become jury members
-puts ""
+puts 
 finalists = @merge_tribe.members #set finalists
 puts "The final two contestants are: "
 finalists.each_with_index { |finalist, index| 
 	puts "#{index+1}."+" #{finalist.name}".upcase.blue
 }
-puts ""
+puts 
 @jury.print_jury
-puts ""
+puts 
 puts "and the voting results are: "
-puts ""
+puts 
 vote_results = @jury.cast_votes(finalists) #Jury members report votes
-puts ""
+puts 
 @jury.report_votes(vote_results) #Jury announces their votes
 
 @winner = @jury.announce_winner(vote_results) #Jury announces final winner
-puts ""
+puts 
 puts "The ultimate SURVIVOR is: "
 puts @winner.upcase.green
 
