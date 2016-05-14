@@ -30,7 +30,7 @@ class Game
 		}
 		clear_tribes
 		@tribes << Tribe.new(name: merge_tribe_name, members: merge_members)
-		return Tribe.new(name: merge_tribe_name, members: merge_members)
+		return @tribes.first
 	end
 
 	def individual_immunity_challenge

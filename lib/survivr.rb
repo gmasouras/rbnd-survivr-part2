@@ -28,15 +28,10 @@ def phase_one
 		puts "Elimination #{time+1}".light_blue
 		unlucky_tribe = @borneo.immunity_challenge
 		puts "The loser tribe is: "+"#{unlucky_tribe.name}".blue
-		lucky_tribe = @borneo.tribes.find { |tribe| tribe != unlucky_tribe}
 
 		unlucky_contestant = unlucky_tribe.tribal_council(immune: nil)
 		puts "The eliminated contestant is: "+"#{unlucky_contestant.name}".red
 		unlucky_tribe.members.delete(unlucky_contestant)
-
-		@borneo.clear_tribes
-		@borneo.add_tribe(unlucky_tribe)
-		@borneo.add_tribe(lucky_tribe)
 	}
 end
 
